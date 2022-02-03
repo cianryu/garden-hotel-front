@@ -1,0 +1,2170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.5/xlsx.full.min.js"></script>
+<script src="js/room.js"></script>
+<link rel="stylesheet" href="css/room.css">
+<title>room</title>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+        <input type="file" onchange="readExcel1()" id="uploadBtn1" value="Departure" />
+        <input type="file" onchange="readExcel2()" id="uploadBtn2" value="Summary" />
+        <input type="button" onclick="reRoomCheck()" id="reRoom" value="Occupied" />
+        <input type="button" onclick="printPage()" id="print" value="프린트" />
+        <input type="button" onclick="fn_notCleaning()" id="notCleaning" value="NotCleaning" />
+    </div>
+    <div id="content">
+      <table class="report">
+        <tbody>
+          <tr>
+            <td class="currentDt" id="currentDt"></td>
+            <td>NIGHT</td>
+            <td id="nightStaff">
+              <input type="text" value=""/>
+            </td>
+            <td></td>
+            <td>Not Cleaning</td>
+            <td id="notCleaningCnt"></td>
+            <td>RM Assignment</td>
+            <td id="staffNum">
+              <input type="text" value=""/>
+            </td>
+            <td>명</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="room">
+        <tr>
+          <td colspan="3" >3F</td>
+          <td colspan="3" >4F</td>
+          <td colspan="3" >5F</td>
+          <td colspan="3" >6F</td>
+          <td colspan="3" >7F</td>
+          <td colspan="3" >8F</td>
+          <td colspan="3" >9F</td>
+          <td colspan="3" >10F</td>
+          <td colspan="3" >11F</td>
+          <td colspan="3" >12F</td>
+          <td colspan="3" >14F</td>
+          <td colspan="3" >15F</td>
+          <td colspan="3" >16F</td>
+        </tr>
+        <tr>
+          <td rowspan="4" colspan="3" class="etc-room bottom_end">Linen<br>Storage</td>
+          <td class="roomNo 4F floor4C">01</td>
+          <td class="roomType" id="s_0401"></td>
+          <td class="staffNm" id="u_0401">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F floor5C">01</td>
+          <td class="roomType" id="s_0501"></td>
+          <td class="staffNm" id="u_0501">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+          <td class="roomNo 6F floor6C">01</td>
+          <td class="roomType" id="s_0601"></td>
+          <td class="staffNm" id="u_0601">
+            <input type="text" class="staff6C" value=""/>
+          </td>
+          <td class="roomNo 7F floor7C">01</td>
+          <td class="roomType" id="s_0701"></td>
+          <td class="staffNm" id="u_0701">
+            <input type="text" class="staff7C" value=""/>
+          </td>
+          <td class="roomNo 8F floor8C">01</td>
+          <td class="roomType" id="s_0801"></td>
+          <td class="staffNm" id="u_0801">
+            <input type="text" class="staff8C" value=""/>
+          </td>
+          <td class="roomNo 9F floor9C">01</td>
+          <td class="roomType" id="s_0901"></td>
+          <td class="staffNm" id="u_0901">
+            <input type="text" class="staff9C" value=""/>
+          </td>
+          <td class="roomNo 10F floor10C">01</td>
+          <td class="roomType" id="s_1001"></td>
+          <td class="staffNm" id="u_1001">
+            <input type="text" class="staff10C" value=""/>
+          </td>
+          <td class="roomNo 11F floor11C">01</td>
+          <td class="roomType" id="s_1101"></td>
+          <td class="staffNm" id="u_1101">
+            <input type="text" class="staff11C" value=""/>
+          </td>
+          <td class="roomNo 12F floor12C">01</td>
+          <td class="roomType" id="s_1201"></td>
+          <td class="staffNm" id="u_1201">
+            <input type="text" class="staff12C" value=""/>
+          </td>
+          <td class="roomNo 14F floor14C">01</td>
+          <td class="roomType" id="s_1401"></td>
+          <td class="staffNm" id="u_1401">
+            <input type="text" class="staff14C" value=""/>
+          </td>
+          <td class="roomNo 15F floor15C">01</td>
+          <td class="roomType" id="s_1501"></td>
+          <td class="staffNm" id="u_1501">
+            <input type="text" class="staff15C" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 16F floor16A">01</td>
+          <td rowspan="2" class="roomType" id="s_1601"></td>
+          <td rowspan="2" class="staffNm right_end" id="u_1601">
+            <input type="text" class="staff16A" value=""/>
+          </td>
+        </tr>
+        <tr>
+
+          <td class="roomNo 4F floor4C">02</td>
+          <td class="roomType" id="s_0402"></td>
+          <td class="staffNm" id="u_0402">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F floor5C">02</td>
+          <td class="roomType" id="s_0502"></td>
+          <td class="staffNm" id="u_0502">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+          <td class="roomNo 6F floor6C">02</td>
+          <td class="roomType" id="s_0602"></td>
+          <td class="staffNm" id="u_0602">
+            <input type="text" class="staff6C" value=""/>
+          </td>
+          <td class="roomNo 7F floor7C">02</td>
+          <td class="roomType" id="s_0702"></td>
+          <td class="staffNm" id="u_0702">
+            <input type="text" class="staff7C" value=""/>
+          </td>
+          <td class="roomNo 8F floor8C">02</td>
+          <td class="roomType" id="s_0802"></td>
+          <td class="staffNm" id="u_0802">
+            <input type="text" class="staff8C" value=""/>
+          </td>
+          <td class="roomNo 9F floor9C">02</td>
+          <td class="roomType" id="s_0902"></td>
+          <td class="staffNm" id="u_0902">
+            <input type="text" class="staff9C" value=""/>
+          </td>
+          <td class="roomNo 10F floor10C">02</td>
+          <td class="roomType" id="s_1002"></td>
+          <td class="staffNm" id="u_1002">
+            <input type="text" class="staff10C" value=""/>
+          </td>
+          <td class="roomNo 11F floor11C">02</td>
+          <td class="roomType" id="s_1102"></td>
+          <td class="staffNm" id="u_1102">
+            <input type="text" class="staff11C" value=""/>
+          </td>
+          <td class="roomNo 12F floor12C">02</td>
+          <td class="roomType" id="s_1202"></td>
+          <td class="staffNm" id="u_1202">
+            <input type="text" class="staff12C" value=""/>
+          </td>
+          <td class="roomNo 14F floor14C">02</td>
+          <td class="roomType" id="s_1402"></td>
+          <td class="staffNm" id="u_1402">
+            <input type="text" class="staff14C" value=""/>
+          </td>
+          <td class="roomNo 15F floor15C">02</td>
+          <td class="roomType" id="s_1502"></td>
+          <td class="staffNm" id="u_1502">
+            <input type="text" class="staff15C" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 4F floor4C">03</td>
+          <td class="roomType" id="s_0403"></td>
+          <td class="staffNm" id="u_0403">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F floor5C">03</td>
+          <td class="roomType" id="s_0503"></td>
+          <td class="staffNm" id="u_0503">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+          <td class="roomNo 6F floor6C">03</td>
+          <td class="roomType" id="s_0603"></td>
+          <td class="staffNm" id="u_0603">
+            <input type="text" class="staff6C" value=""/>
+          </td>
+          <td class="roomNo 7F floor7C">03</td>
+          <td class="roomType" id="s_0703"></td>
+          <td class="staffNm" id="u_0703">
+            <input type="text" class="staff7C" value=""/>
+          </td>
+          <td class="roomNo 8F floor8C">03</td>
+          <td class="roomType" id="s_0803"></td>
+          <td class="staffNm" id="u_0803">
+            <input type="text" class="staff8C" value=""/>
+          </td>
+          <td class="roomNo 9F floor9C">03</td>
+          <td class="roomType" id="s_0903"></td>
+          <td class="staffNm" id="u_0903">
+            <input type="text" class="staff9C" value=""/>
+          </td>
+          <td class="roomNo 10F floor10C">03</td>
+          <td class="roomType" id="s_1003"></td>
+          <td class="staffNm" id="u_1003">
+            <input type="text" class="staff10C" value=""/>
+          </td>
+          <td class="roomNo 11F floor11C">03</td>
+          <td class="roomType" id="s_1103"></td>
+          <td class="staffNm" id="u_1103">
+            <input type="text" class="staff11C" value=""/>
+          </td>
+          <td class="roomNo 12F floor12C">03</td>
+          <td class="roomType" id="s_1203"></td>
+          <td class="staffNm" id="u_1203">
+            <input type="text" class="staff12C" value=""/>
+          </td>
+          <td class="roomNo 14F floor14C">03</td>
+          <td class="roomType" id="s_1403"></td>
+          <td class="staffNm" id="u_1403">
+            <input type="text" class="staff14C" value=""/>
+          </td>
+          <td class="roomNo 15F floor15C">03</td>
+          <td class="roomType" id="s_1503"></td>
+          <td class="staffNm" id="u_1503">
+            <input type="text" class="staff15C" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 16F floor16A">02</td>
+          <td rowspan="2" class="roomType" id="s_1602"></td>
+          <td rowspan="2" class="staffNm right_end" id="u_1602">
+            <input type="text" class="staff16A" value=""/>
+          </td>
+        </tr>
+        <tr>
+
+          <td class="roomNo 4F floor4C">04</td>
+          <td class="roomType" id="s_0404"></td>
+          <td class="staffNm" id="u_0404">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F floor5C">04</td>
+          <td class="roomType" id="s_0504"></td>
+          <td class="staffNm" id="u_0504">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+          <td class="roomNo 6F floor6C">04</td>
+          <td class="roomType" id="s_0604"></td>
+          <td class="staffNm" id="u_0604">
+            <input type="text" class="staff6C" value=""/>
+          </td>
+          <td class="roomNo 7F floor7C">04</td>
+          <td class="roomType" id="s_0704"></td>
+          <td class="staffNm" id="u_0704">
+            <input type="text" class="staff7C" value=""/>
+          </td>
+          <td class="roomNo 8F floor8C">04</td>
+          <td class="roomType" id="s_0804"></td>
+          <td class="staffNm" id="u_0804">
+            <input type="text" class="staff8C" value=""/>
+          </td>
+          <td class="roomNo 9F floor9C">04</td>
+          <td class="roomType" id="s_0904"></td>
+          <td class="staffNm" id="u_0904">
+            <input type="text" class="staff9C" value=""/>
+          </td>
+          <td class="roomNo 10F floor10C">04</td>
+          <td class="roomType" id="s_1004"></td>
+          <td class="staffNm" id="u_1004">
+            <input type="text" class="staff10C" value=""/>
+          </td>
+          <td class="roomNo 11F floor11C">04</td>
+          <td class="roomType" id="s_1104"></td>
+          <td class="staffNm" id="u_1104">
+            <input type="text" class="staff11C" value=""/>
+          </td>
+          <td class="roomNo 12F floor12C">04</td>
+          <td class="roomType" id="s_1204"></td>
+          <td class="staffNm" id="u_1204">
+            <input type="text" class="staff12C" value=""/>
+          </td>
+          <td class="roomNo 14F floor14C">04</td>
+          <td class="roomType" id="s_1404"></td>
+          <td class="staffNm" id="u_1404">
+            <input type="text" class="staff14C" value=""/>
+          </td>
+          <td class="roomNo 15F floor15C">04</td>
+          <td class="roomType" id="s_1504"></td>
+          <td class="staffNm" id="u_1504">
+            <input type="text" class="staff15C" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F bottom_end floor3A">05</td>
+          <td class="roomType bottom_end" id="s_0305"></td>
+          <td class="staffNm bottom_end" id="u_0305">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4C bottom_end">05</td>
+          <td class="roomType bottom_end" id="s_0405"></td>
+          <td class="staffNm bottom_end" id="u_0405">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F bottom_end floor5C">05</td>
+          <td class="roomType bottom_end" id="s_0505"></td>
+          <td class="staffNm bottom_end" id="u_0505">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+          <td class="roomNo 6F bottom_end floor6C">05</td>
+          <td class="roomType bottom_end" id="s_0605"></td>
+          <td class="staffNm bottom_end" id="u_0605">
+            <input type="text" class="staff6C" value=""/>
+          </td>
+          <td class="roomNo 7F bottom_end floor7C">05</td>
+          <td class="roomType bottom_end" id="s_0705"></td>
+          <td class="staffNm bottom_end" id="u_0705">
+            <input type="text" class="staff7C" value=""/>
+          </td>
+          <td class="roomNo 8F bottom_end floor8C">05</td>
+          <td class="roomType bottom_end" id="s_0805"></td>
+          <td class="staffNm bottom_end" id="u_0805">
+            <input type="text" class="staff8C" value=""/>
+          </td>
+          <td class="roomNo 9F bottom_end floor9C">05</td>
+          <td class="roomType bottom_end" id="s_0905"></td>
+          <td class="staffNm bottom_end" id="u_0905">
+            <input type="text" class="staff9C" value=""/>
+          </td>
+          <td class="roomNo 10F bottom_end floor10C">05</td>
+          <td class="roomType bottom_end" id="s_1005"></td>
+          <td class="staffNm bottom_end" id="u_1005">
+            <input type="text" class="staff10C" value=""/>
+          </td>
+          <td class="roomNo 11F bottom_end floor11C">05</td>
+          <td class="roomType bottom_end" id="s_1105"></td>
+          <td class="staffNm bottom_end" id="u_1105">
+            <input type="text" class="staff11C" value=""/>
+          </td>
+          <td class="roomNo 12F bottom_end floor12C">05</td>
+          <td class="roomType bottom_end" id="s_1205"></td>
+          <td class="staffNm bottom_end" id="u_1205">
+            <input type="text" class="staff12C" value=""/>
+          </td>
+          <td class="roomNo 14F bottom_end floor14C">05</td>
+          <td class="roomType bottom_end" id="s_1405"></td>
+          <td class="staffNm bottom_end" id="u_1405">
+            <input type="text" class="staff14C" value=""/>
+          </td>
+          <td class="roomNo 15F bottom_end floor15C">05</td>
+          <td class="roomType bottom_end" id="s_1505"></td>
+          <td class="staffNm bottom_end" id="u_1505">
+            <input type="text" class="staff15C" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 16F floor16A">03</td>
+          <td rowspan="2" class="roomType" id="s_1603"></td>
+          <td rowspan="2" class="staffNm right_end" id="u_1603">
+            <input type="text" class="staff16A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">06</td>
+          <td class="roomType" id="s_0306"></td>
+          <td class="staffNm" id="u_0306">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4A">06</td>
+          <td class="roomType" id="s_0406"></td>
+          <td class="staffNm" id="u_0406">
+            <input type="text" class="staff4A" value=""/>
+          </td>
+          <td class="roomNo 5F floor5A">06</td>
+          <td class="roomType" id="s_0506"></td>
+          <td class="staffNm" id="u_0506">
+            <input type="text" class="staff5A" value=""/>
+          </td>
+          <td class="roomNo 6F floor6A">06</td>
+          <td class="roomType" id="s_0606"></td>
+          <td class="staffNm" id="u_0606">
+            <input type="text" class="staff6A" value=""/>
+          </td>
+          <td class="roomNo 7F floor7A">06</td>
+          <td class="roomType" id="s_0706"></td>
+          <td class="staffNm" id="u_0706">
+            <input type="text" class="staff7A" value=""/>
+          </td>
+          <td class="roomNo 8F floor8A">06</td>
+          <td class="roomType" id="s_0806"></td>
+          <td class="staffNm" id="u_0806">
+            <input type="text" class="staff8A" value=""/>
+          </td>
+          <td class="roomNo 9F floor9A">06</td>
+          <td class="roomType" id="s_0906"></td>
+          <td class="staffNm" id="u_0906">
+            <input type="text" class="staff9A" value=""/>
+          </td>
+          <td class="roomNo 10F floor10A">06</td>
+          <td class="roomType" id="s_1006"></td>
+          <td class="staffNm" id="u_1006">
+            <input type="text" class="staff10A" value=""/>
+          </td>
+          <td class="roomNo 11F floor11A">06</td>
+          <td class="roomType" id="s_1106"></td>
+          <td class="staffNm" id="u_1106">
+            <input type="text" class="staff11A" value=""/>
+          </td>
+          <td class="roomNo 12F floor12A">06</td>
+          <td class="roomType" id="s_1206"></td>
+          <td class="staffNm" id="u_1206">
+            <input type="text" class="staff12A" value=""/>
+          </td>
+          <td class="roomNo 14F floor14A">06</td>
+          <td class="roomType" id="s_1406"></td>
+          <td class="staffNm" id="u_1406">
+            <input type="text" class="staff14A" value=""/>
+          </td>
+          <td class="roomNo 15F floor15A">06</td>
+          <td class="roomType" id="s_1506"></td>
+          <td class="staffNm" id="u_1506">
+            <input type="text" class="staff15A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">07</td>
+          <td class="roomType" id="s_0307"></td>
+          <td class="staffNm" id="u_0307">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4A">07</td>
+          <td class="roomType" id="s_0407"></td>
+          <td class="staffNm" id="u_0407">
+            <input type="text" class="staff4A" value=""/>
+          </td>
+          <td class="roomNo 5F floor5A">07</td>
+          <td class="roomType" id="s_0507"></td>
+          <td class="staffNm" id="u_0507">
+            <input type="text" class="staff5A" value=""/>
+          </td>
+          <td class="roomNo 6F floor6A">07</td>
+          <td class="roomType" id="s_0607"></td>
+          <td class="staffNm" id="u_0607">
+            <input type="text" class="staff6A" value=""/>
+          </td>
+          <td class="roomNo 7F floor7A">07</td>
+          <td class="roomType" id="s_0707"></td>
+          <td class="staffNm" id="u_0707">
+            <input type="text" class="staff7A" value=""/>
+          </td>
+          <td class="roomNo 8F floor8A">07</td>
+          <td class="roomType" id="s_0807"></td>
+          <td class="staffNm" id="u_0807">
+            <input type="text" class="staff8A" value=""/>
+          </td>
+          <td class="roomNo 9F floor9A">07</td>
+          <td class="roomType" id="s_0907"></td>
+          <td class="staffNm" id="u_0907">
+            <input type="text" class="staff9A" value=""/>
+          </td>
+          <td class="roomNo 10F floor10A">07</td>
+          <td class="roomType" id="s_1007"></td>
+          <td class="staffNm" id="u_1007">
+            <input type="text" class="staff10A" value=""/>
+          </td>
+          <td class="roomNo 11F floor11A">07</td>
+          <td class="roomType" id="s_1107"></td>
+          <td class="staffNm" id="u_1107">
+            <input type="text" class="staff11A" value=""/>
+          </td>
+          <td class="roomNo 12F floor12A">07</td>
+          <td class="roomType" id="s_1207"></td>
+          <td class="staffNm" id="u_1207">
+            <input type="text" class="staff12A" value=""/>
+          </td>
+          <td class="roomNo 14F floor14A">07</td>
+          <td class="roomType" id="s_1407"></td>
+          <td class="staffNm" id="u_1407">
+            <input type="text" class="staff14A" value=""/>
+          </td>
+          <td class="roomNo 15F floor15A">07</td>
+          <td class="roomType" id="s_1507"></td>
+          <td class="staffNm" id="u_1507">
+            <input type="text" class="staff15A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 16F floor16A">04</td>
+          <td rowspan="2" class="roomType" id="s_1604"></td>
+          <td rowspan="2" class="staffNm right_end" id="u_1604">
+            <input type="text" class="staff16A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">08</td>
+          <td class="roomType" id="s_0308"></td>
+          <td class="staffNm" id="u_0308">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4A">08</td>
+          <td class="roomType" id="s_0408"></td>
+          <td class="staffNm" id="u_0408">
+            <input type="text" class="staff4A" value=""/>
+          </td>
+          <td class="roomNo 5F floor5A">08</td>
+          <td class="roomType" id="s_0508"></td>
+          <td class="staffNm" id="u_0508">
+            <input type="text" class="staff5A" value=""/>
+          </td>
+          <td class="roomNo 6F floor6A">08</td>
+          <td class="roomType" id="s_0608"></td>
+          <td class="staffNm" id="u_0608">
+            <input type="text" class="staff6A" value=""/>
+          </td>
+          <td class="roomNo 7F floor7A">08</td>
+          <td class="roomType" id="s_0708"></td>
+          <td class="staffNm" id="u_0708">
+            <input type="text" class="staff7A" value=""/>
+          </td>
+          <td class="roomNo 8F floor8A">08</td>
+          <td class="roomType" id="s_0808"></td>
+          <td class="staffNm" id="u_0808">
+            <input type="text" class="staff8A" value=""/>
+          </td>
+          <td class="roomNo 9F floor9A">08</td>
+          <td class="roomType" id="s_0908"></td>
+          <td class="staffNm" id="u_0908">
+            <input type="text" class="staff9A" value=""/>
+          </td>
+          <td class="roomNo 10F floor10A">08</td>
+          <td class="roomType" id="s_1008"></td>
+          <td class="staffNm" id="u_1008">
+            <input type="text" class="staff10A" value=""/>
+          </td>
+          <td class="roomNo 11F floor11A">08</td>
+          <td class="roomType" id="s_1108"></td>
+          <td class="staffNm" id="u_1108">
+            <input type="text" class="staff11A" value=""/>
+          </td>
+          <td class="roomNo 12F floor12A">08</td>
+          <td class="roomType" id="s_1208"></td>
+          <td class="staffNm" id="u_1208">
+            <input type="text" class="staff12A" value=""/>
+          </td>
+          <td class="roomNo 14F floor14A">08</td>
+          <td class="roomType" id="s_1408"></td>
+          <td class="staffNm" id="u_1408">
+            <input type="text" class="staff14A" value=""/>
+          </td>
+          <td class="roomNo 15F floor15A">08</td>
+          <td class="roomType" id="s_1508"></td>
+          <td class="staffNm right_end" id="u_1508">
+            <input type="text" class="staff15A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">09</td>
+          <td class="roomType" id="s_0309"></td>
+          <td class="staffNm" id="u_0309">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4A">09</td>
+          <td class="roomType" id="s_0409"></td>
+          <td class="staffNm" id="u_0409">
+            <input type="text" class="staff4A" value=""/>
+          </td>
+          <td class="roomNo 5F floor5A">09</td>
+          <td class="roomType" id="s_0509"></td>
+          <td class="staffNm" id="u_0509">
+            <input type="text" class="staff5A" value=""/>
+          </td>
+          <td class="roomNo 6F floor6A">09</td>
+          <td class="roomType" id="s_0609"></td>
+          <td class="staffNm" id="u_0609">
+            <input type="text" class="staff6A" value=""/>
+          </td>
+          <td class="roomNo 7F floor7A">09</td>
+          <td class="roomType" id="s_0709"></td>
+          <td class="staffNm" id="u_0709">
+            <input type="text" class="staff7A" value=""/>
+          </td>
+          <td class="roomNo 8F floor8A">09</td>
+          <td class="roomType" id="s_0809"></td>
+          <td class="staffNm" id="u_0809">
+            <input type="text" class="staff8A" value=""/>
+          </td>
+          <td class="roomNo 9F floor9A">09</td>
+          <td class="roomType" id="s_0909"></td>
+          <td class="staffNm" id="u_0909">
+            <input type="text" class="staff9A" value=""/>
+          </td>
+          <td class="roomNo 10F floor10A">09</td>
+          <td class="roomType" id="s_1009"></td>
+          <td class="staffNm" id="u_1009">
+            <input type="text" class="staff10A" value=""/>
+          </td>
+          <td class="roomNo 11F floor11A">09</td>
+          <td class="roomType" id="s_1109"></td>
+          <td class="staffNm" id="u_1109">
+            <input type="text" class="staff11A" value=""/>
+          </td>
+          <td class="roomNo 12F floor12A">09</td>
+          <td class="roomType" id="s_1209"></td>
+          <td class="staffNm" id="u_1209">
+            <input type="text" class="staff12A" value=""/>
+          </td>
+          <td class="roomNo 14F floor14A">09</td>
+          <td class="roomType" id="s_1409"></td>
+          <td class="staffNm" id="u_1409">
+            <input type="text" class="staff14A" value=""/>
+          </td>
+          <td class="roomNo 15F floor15A">09</td>
+          <td class="roomType" id="s_1509"></td>
+          <td class="staffNm" id="u_1509">
+            <input type="text" class="staff15A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 16F floor16A">05</td>
+          <td rowspan="2" class="roomType" id="s_1605"></td>
+          <td rowspan="2" class="staffNm right_end" id="u_1605">
+            <input type="text" class="staff16A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F bottom_end floor3A" bottom_end>10</td>
+          <td class="roomType bottom_end" id="s_0310"></td>
+          <td class="staffNm bottom_end" id="u_0310">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F bottom_end floor4A">10</td>
+          <td class="roomType bottom_end" id="s_0410"></td>
+          <td class="staffNm bottom_end" id="u_0410">
+            <input type="text" class="staff4A" value=""/>
+          </td>
+          <td class="roomNo 5F bottom_end floor5A">10</td>
+          <td class="roomType bottom_end" id="s_0510"></td>
+          <td class="staffNm bottom_end" id="u_0510">
+            <input type="text" class="staff5A" value=""/>
+          </td>
+          <td class="roomNo 6F bottom_end floor6A">10</td>
+          <td class="roomType bottom_end" id="s_0610"></td>
+          <td class="staffNm bottom_end" id="u_0610">
+            <input type="text" class="staff6A" value=""/>
+          </td>
+          <td class="roomNo 7F bottom_end floor7A">10</td>
+          <td class="roomType bottom_end" id="s_0710"></td>
+          <td class="staffNm bottom_end" id="u_0710">
+            <input type="text" class="staff7A" value=""/>
+          </td>
+          <td class="roomNo 8F bottom_end floor8A">10</td>
+          <td class="roomType bottom_end" id="s_0810"></td>
+          <td class="staffNm bottom_end" id="u_0810">
+            <input type="text" class="staff8A" value=""/>
+          </td>
+          <td class="roomNo 9F bottom_end floor9A">10</td>
+          <td class="roomType bottom_end" id="s_0910"></td>
+          <td class="staffNm bottom_end" id="u_0910">
+            <input type="text" class="staff9A" value=""/>
+          </td>
+          <td class="roomNo 10F bottom_end floor10A">10</td>
+          <td class="roomType bottom_end" id="s_1010"></td>
+          <td class="staffNm bottom_end" id="u_1010">
+            <input type="text" class="staff10A" value=""/>
+          </td>
+          <td class="roomNo 11F bottom_end floor11A">10</td>
+          <td class="roomType bottom_end" id="s_1110"></td>
+          <td class="staffNm bottom_end" id="u_1110">
+            <input type="text" class="staff11A" value=""/>
+          </td>
+          <td class="roomNo 12F bottom_end floor12A">10</td>
+          <td class="roomType bottom_end" id="s_1210"></td>
+          <td class="staffNm bottom_end" id="u_1210">
+            <input type="text" class="staff12A" value=""/>
+          </td>
+          <td class="roomNo 14F bottom_end floor14A">10</td>
+          <td class="roomType bottom_end" id="s_1410"></td>
+          <td class="staffNm bottom_end" id="u_1410">
+            <input type="text" class="staff14A" value=""/>
+          </td>
+          <td class="roomNo 15F bottom_end floor15A">10</td>
+          <td class="roomType bottom_end" id="s_1510"></td>
+          <td class="staffNm right_end bottom_end" id="u_1510">
+            <input type="text" class="staff15A" value=""/>
+          </td>
+        </tr>
+        <!-- 10end 1staff -->
+        <tr>
+          <td class="roomNo 3F floor3A">11</td>
+          <td class="roomType" id="s_0311"></td>
+          <td class="staffNm" id="u_0311">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4B">11</td>
+          <td class="roomType" id="s_0411"></td>
+          <td class="staffNm" id="u_0411">
+            <input type="text" class="staff4B" value=""/>
+          </td>
+          <td class="roomNo 5F floor5B">11</td>
+          <td class="roomType" id="s_0511"></td>
+          <td class="staffNm" id="u_0511">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F floor6B">11</td>
+          <td class="roomType" id="s_0611"></td>
+          <td class="staffNm" id="u_0611">
+            <input type="text" class="staff6B" value=""/>
+          </td>
+          <td class="roomNo 7F floor7B">11</td>
+          <td class="roomType" id="s_0711"></td>
+          <td class="staffNm" id="u_0711">
+            <input type="text" class="staff7B" value=""/>
+          </td>
+          <td class="roomNo 8F floor8B">11</td>
+          <td class="roomType" id="s_0811"></td>
+          <td class="staffNm" id="u_0811">
+            <input type="text" class="staff8B" value=""/>
+          </td>
+          <td class="roomNo 9F floor9B">11</td>
+          <td class="roomType" id="s_0911"></td>
+          <td class="staffNm" id="u_0911">
+            <input type="text" class="staff9B" value=""/>
+          </td>
+          <td class="roomNo 10F floor10B">11</td>
+          <td class="roomType" id="s_1011"></td>
+          <td class="staffNm" id="u_1011">
+            <input type="text" class="staff10B" value=""/>
+          </td>
+          <td class="roomNo 11F floor11B">11</td>
+          <td class="roomType" id="s_1111"></td>
+          <td class="staffNm" id="u_1111">
+            <input type="text" class="staff11B" value=""/>
+          </td>
+          <td class="roomNo 12F floor12B">11</td>
+          <td class="roomType" id="s_1211"></td>
+          <td class="staffNm" id="u_1211">
+            <input type="text" class="staff12B" value=""/>
+          </td>
+          <td class="roomNo 14F floor14B">11</td>
+          <td class="roomType" id="s_1411"></td>
+          <td class="staffNm" id="u_1411">
+            <input type="text" class="staff14B" value=""/>
+          </td>
+          <td class="roomNo 15F floor15B">11</td>
+          <td class="roomType" id="s_1511"></td>
+          <td class="staffNm" id="u_1511">
+            <input type="text" class="staff15B" value=""/>
+          </td>
+          <td rowspan="4" class="roomNo 16F bottom_end floor16A">06</td>
+          <td rowspan="4" class="roomType bottom_end" id="s_1606"></td>
+          <td rowspan="4" class="staffNm right_end bottom_end" id="u_1606">
+            <input type="text" class="staff16A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">12</td>
+          <td class="roomType" id="s_0312"></td>
+          <td class="staffNm" id="u_0312">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4B">12</td>
+          <td class="roomType" id="s_0412"></td>
+          <td class="staffNm" id="u_0412">
+            <input type="text" class="staff4B" value=""/>
+          </td>
+          <td class="roomNo 5F floor5B">12</td>
+          <td class="roomType" id="s_0512"></td>
+          <td class="staffNm" id="u_0512">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F floor6B">12</td>
+          <td class="roomType" id="s_0612"></td>
+          <td class="staffNm" id="u_0612">
+            <input type="text" class="staff6B" value=""/>
+          </td>
+          <td class="roomNo 7F floor7B">12</td>
+          <td class="roomType" id="s_0712"></td>
+          <td class="staffNm" id="u_0712">
+            <input type="text" class="staff7B" value=""/>
+          </td>
+          <td class="roomNo 8F floor8B">12</td>
+          <td class="roomType" id="s_0812"></td>
+          <td class="staffNm" id="u_0812">
+            <input type="text" class="staff8B" value=""/>
+          </td>
+          <td class="roomNo 9F floor9B">12</td>
+          <td class="roomType" id="s_0912"></td>
+          <td class="staffNm" id="u_0912">
+            <input type="text" class="staff9B" value=""/>
+          </td>
+          <td class="roomNo 10F floor10B">12</td>
+          <td class="roomType" id="s_1012"></td>
+          <td class="staffNm" id="u_1012">
+            <input type="text" class="staff10B" value=""/>
+          </td>
+          <td class="roomNo 11F floor11B">12</td>
+          <td class="roomType" id="s_1112"></td>
+          <td class="staffNm" id="u_1112">
+            <input type="text" class="staff11B" value=""/>
+          </td>
+          <td class="roomNo 12F floor12B">12</td>
+          <td class="roomType" id="s_1212"></td>
+          <td class="staffNm" id="u_1212">
+            <input type="text" class="staff12B" value=""/>
+          </td>
+          <td class="roomNo 14F floor14B">12</td>
+          <td class="roomType" id="s_1412"></td>
+          <td class="staffNm" id="u_1412">
+            <input type="text" class="staff14B" value=""/>
+          </td>
+          <td class="roomNo 15F floor15B">12</td>
+          <td class="roomType" id="s_1512"></td>
+          <td class="staffNm right_end" id="u_1512">
+            <input type="text" class="staff15B" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">13</td>
+          <td class="roomType" id="s_0313"></td>
+          <td class="staffNm" id="u_0313">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4B">13</td>
+          <td class="roomType" id="s_0413"></td>
+          <td class="staffNm" id="u_0413">
+            <input type="text" class="staff4B" value=""/>
+          </td>
+          <td class="roomNo 5F floor5B">13</td>
+          <td class="roomType" id="s_0513"></td>
+          <td class="staffNm" id="u_0513">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F floor6B">13</td>
+          <td class="roomType" id="s_0613"></td>
+          <td class="staffNm" id="u_0613">
+            <input type="text" class="staff6B" value=""/>
+          </td>
+          <td class="roomNo 7F floor7B">13</td>
+          <td class="roomType" id="s_0713"></td>
+          <td class="staffNm" id="u_0713">
+            <input type="text" class="staff7B" value=""/>
+          </td>
+          <td class="roomNo 8F floor8B">13</td>
+          <td class="roomType" id="s_0813"></td>
+          <td class="staffNm" id="u_0813">
+            <input type="text" class="staff8B" value=""/>
+          </td>
+          <td class="roomNo 9F floor9B">13</td>
+          <td class="roomType" id="s_0913"></td>
+          <td class="staffNm" id="u_0913">
+            <input type="text" class="staff9B" value=""/>
+          </td>
+          <td class="roomNo 10F floor10B">13</td>
+          <td class="roomType" id="s_1013"></td>
+          <td class="staffNm" id="u_1013">
+            <input type="text" class="staff10B" value=""/>
+          </td>
+          <td class="roomNo 11F floor11B">13</td>
+          <td class="roomType" id="s_1113"></td>
+          <td class="staffNm" id="u_1113">
+            <input type="text" class="staff11B" value=""/>
+          </td>
+          <td class="roomNo 12F floor12B">13</td>
+          <td class="roomType" id="s_1213"></td>
+          <td class="staffNm" id="u_1213">
+            <input type="text" class="staff12B" value=""/>
+          </td>
+          <td class="roomNo 14F floor14B">13</td>
+          <td class="roomType" id="s_1413"></td>
+          <td class="staffNm" id="u_1413">
+            <input type="text" class="staff14B" value=""/>
+          </td>
+          <td class="roomNo 15F floor15B">13</td>
+          <td class="roomType" id="s_1513"></td>
+          <td class="staffNm right_end" id="u_1513">
+            <input type="text" class="staff15B" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">14</td>
+          <td class="roomType" id="s_0314"></td>
+          <td class="staffNm" id="u_0314">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4B">14</td>
+          <td class="roomType" id="s_0414"></td>
+          <td class="staffNm" id="u_0414">
+            <input type="text" class="staff4B" value=""/>
+          </td>
+          <td class="roomNo 5F floor5B">14</td>
+          <td class="roomType" id="s_0514"></td>
+          <td class="staffNm" id="u_0514">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F floor6B">14</td>
+          <td class="roomType" id="s_0614"></td>
+          <td class="staffNm" id="u_0614">
+            <input type="text" class="staff6B" value=""/>
+          </td>
+          <td class="roomNo 7F floor7B">14</td>
+          <td class="roomType" id="s_0714"></td>
+          <td class="staffNm" id="u_0714">
+            <input type="text" class="staff7B" value=""/>
+          </td>
+          <td class="roomNo 8F floor8B">14</td>
+          <td class="roomType" id="s_0814"></td>
+          <td class="staffNm" id="u_0814">
+            <input type="text" class="staff8B" value=""/>
+          </td>
+          <td class="roomNo 9F floor9B">14</td>
+          <td class="roomType" id="s_0914"></td>
+          <td class="staffNm" id="u_0914">
+            <input type="text" class="staff9B" value=""/>
+          </td>
+          <td class="roomNo 10F floor10B">14</td>
+          <td class="roomType" id="s_1014"></td>
+          <td class="staffNm" id="u_1014">
+            <input type="text" class="staff10B" value=""/>
+          </td>
+          <td class="roomNo 11F floor11B">14</td>
+          <td class="roomType" id="s_1114"></td>
+          <td class="staffNm" id="u_1114">
+            <input type="text" class="staff11B" value=""/>
+          </td>
+          <td class="roomNo 12F floor12B">14</td>
+          <td class="roomType" id="s_1214"></td>
+          <td class="staffNm" id="u_1214">
+            <input type="text" class="staff12B" value=""/>
+          </td>
+          <td class="roomNo 14F floor14B">14</td>
+          <td class="roomType" id="s_1414"></td>
+          <td class="staffNm" id="u_1414">
+            <input type="text" class="staff14B" value=""/>
+          </td>
+          <td class="roomNo 15F floor15B">14</td>
+          <td class="roomType" id="s_1514"></td>
+          <td class="staffNm right_end" id="u_1514">
+            <input type="text" class="staff15B" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">15</td>
+          <td class="roomType" id="s_0315"></td>
+          <td class="staffNm" id="u_0315">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4B">15</td>
+          <td class="roomType" id="s_0415"></td>
+          <td class="staffNm" id="u_0415">
+            <input type="text" class="staff4B" value=""/>
+          </td>
+          <td class="roomNo 5F floor5B">15</td>
+          <td class="roomType" id="s_0515"></td>
+          <td class="staffNm" id="u_0515">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F floor6B">15</td>
+          <td class="roomType" id="s_0615"></td>
+          <td class="staffNm" id="u_0615">
+            <input type="text" class="staff6B" value=""/>
+          </td>
+          <td class="roomNo 7F floor7B">15</td>
+          <td class="roomType" id="s_0715"></td>
+          <td class="staffNm" id="u_0715">
+            <input type="text" class="staff7B" value=""/>
+          </td>
+          <td class="roomNo 8F floor8B">15</td>
+          <td class="roomType" id="s_0815"></td>
+          <td class="staffNm" id="u_0815">
+            <input type="text" class="staff8B" value=""/>
+          </td>
+          <td class="roomNo 9F floor9B">15</td>
+          <td class="roomType" id="s_0915"></td>
+          <td class="staffNm" id="u_0915">
+            <input type="text" class="staff9B" value=""/>
+          </td>
+          <td class="roomNo 10F floor10B">15</td>
+          <td class="roomType" id="s_1015"></td>
+          <td class="staffNm" id="u_1015">
+            <input type="text" class="staff10B" value=""/>
+          </td>
+          <td class="roomNo 11F floor11B">15</td>
+          <td class="roomType" id="s_1115"></td>
+          <td class="staffNm" id="u_1115">
+            <input type="text" class="staff11B" value=""/>
+          </td>
+          <td class="roomNo 12F floor12B">15</td>
+          <td class="roomType" id="s_1215"></td>
+          <td class="staffNm" id="u_1215">
+            <input type="text" class="staff12B" value=""/>
+          </td>
+          <td class="roomNo 14F floor14B">15</td>
+          <td class="roomType" id="s_1415"></td>
+          <td class="staffNm" id="u_1415">
+            <input type="text" class="staff14B" value=""/>
+          </td>
+          <td class="roomNo 15F floor15B">15</td>
+          <td class="roomType" id="s_1515"></td>
+          <td class="staffNm right_end" id="u_1515">
+            <input type="text" class="staff15B" value=""/>
+          </td>
+          <td rowspan="2" colspan="3" class="etc-room bottom_end">회장님실</td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">16</td>
+          <td class="roomType" id="s_0316"></td>
+          <td class="staffNm" id="u_0316">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4B">16</td>
+          <td class="roomType" id="s_0416"></td>
+          <td class="staffNm" id="u_0416">
+            <input type="text" class="staff4B" value=""/>
+          </td>
+          <td class="roomNo 5F floor5B">16</td>
+          <td class="roomType" id="s_0516"></td>
+          <td class="staffNm" id="u_0516">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F floor6B">16</td>
+          <td class="roomType" id="s_0616"></td>
+          <td class="staffNm" id="u_0616">
+            <input type="text" class="staff6B" value=""/>
+          </td>
+          <td class="roomNo 7F floor7B">16</td>
+          <td class="roomType" id="s_0716"></td>
+          <td class="staffNm" id="u_0716">
+            <input type="text" class="staff7B" value=""/>
+          </td>
+          <td class="roomNo 8F floor8B">16</td>
+          <td class="roomType" id="s_0816"></td>
+          <td class="staffNm" id="u_0816">
+            <input type="text" class="staff8B" value=""/>
+          </td>
+          <td class="roomNo 9F floor9B">16</td>
+          <td class="roomType" id="s_0916"></td>
+          <td class="staffNm" id="u_0916">
+            <input type="text" class="staff9B" value=""/>
+          </td>
+          <td class="roomNo 10F floor10B">16</td>
+          <td class="roomType" id="s_1016"></td>
+          <td class="staffNm" id="u_1016">
+            <input type="text" class="staff10B" value=""/>
+          </td>
+          <td class="roomNo 11F floor11B">16</td>
+          <td class="roomType" id="s_1116"></td>
+          <td class="staffNm" id="u_1116">
+            <input type="text" class="staff11B" value=""/>
+          </td>
+          <td class="roomNo 12F floor12B">16</td>
+          <td class="roomType" id="s_1216"></td>
+          <td class="staffNm" id="u_1216">
+            <input type="text" class="staff12B" value=""/>
+          </td>
+          <td class="roomNo 14F floor14B">16</td>
+          <td class="roomType" id="s_1416"></td>
+          <td class="staffNm" id="u_1416">
+            <input type="text" class="staff14B" value=""/>
+          </td>
+          <td class="roomNo 15F floor15B">16</td>
+          <td class="roomType" id="s_1516"></td>
+          <td class="staffNm right_end" id="u_1516">
+            <input type="text" class="staff15B" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">17</td>
+          <td class="roomType" id="s_0317"></td>
+          <td class="staffNm" id="u_0317">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4B">17</td>
+          <td class="roomType" id="s_0417"></td>
+          <td class="staffNm" id="u_0417">
+            <input type="text" class="staff4B" value=""/>
+          </td>
+          <td class="roomNo 5F floor5B">17</td>
+          <td class="roomType" id="s_0517"></td>
+          <td class="staffNm" id="u_0517">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F floor6B">17</td>
+          <td class="roomType" id="s_0617"></td>
+          <td class="staffNm" id="u_0617">
+            <input type="text" class="staff6B" value=""/>
+          </td>
+          <td class="roomNo 7F floor7B">17</td>
+          <td class="roomType" id="s_0717"></td>
+          <td class="staffNm" id="u_0717">
+            <input type="text" class="staff7B" value=""/>
+          </td>
+          <td class="roomNo 8F floor8B">17</td>
+          <td class="roomType" id="s_0817"></td>
+          <td class="staffNm" id="u_0817">
+            <input type="text" class="staff8B" value=""/>
+          </td>
+          <td class="roomNo 9F floor9B">17</td>
+          <td class="roomType" id="s_0917"></td>
+          <td class="staffNm" id="u_0917">
+            <input type="text" class="staff9B" value=""/>
+          </td>
+          <td class="roomNo 10F floor10B">17</td>
+          <td class="roomType" id="s_1017"></td>
+          <td class="staffNm" id="u_1017">
+            <input type="text" class="staff10B" value=""/>
+          </td>
+          <td class="roomNo 11F floor11B">17</td>
+          <td class="roomType" id="s_1117"></td>
+          <td class="staffNm" id="u_1117">
+            <input type="text" class="staff11B" value=""/>
+          </td>
+          <td class="roomNo 12F floor12B">17</td>
+          <td class="roomType" id="s_1217"></td>
+          <td class="staffNm" id="u_1217">
+            <input type="text" class="staff12B" value=""/>
+          </td>
+          <td class="roomNo 14F floor14B">17</td>
+          <td class="roomType" id="s_1417"></td>
+          <td class="staffNm" id="u_1417">
+            <input type="text" class="staff14B" value=""/>
+          </td>
+          <td class="roomNo 15F floor15B">17</td>
+          <td class="roomType" id="s_1517"></td>
+          <td class="staffNm right_end" id="u_1517">
+            <input type="text" class="staff15B" value=""/>
+          </td>
+          <td rowspan="2" colspan="3" class="etc-room bottom_end">부회장님실</td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">18</td>
+          <td class="roomType" id="s_0318"></td>
+          <td class="staffNm" id="u_0318">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4B">18</td>
+          <td class="roomType" id="s_0418"></td>
+          <td class="staffNm" id="u_0418">
+            <input type="text" class="staff4B" value=""/>
+          </td>
+          <td class="roomNo 5F floor5B">18</td>
+          <td class="roomType" id="s_0518"></td>
+          <td class="staffNm" id="u_0518">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F floor6B">18</td>
+          <td class="roomType" id="s_0618"></td>
+          <td class="staffNm" id="u_0618">
+            <input type="text" class="staff6B" value=""/>
+          </td>
+          <td class="roomNo 7F floor7B">18</td>
+          <td class="roomType" id="s_0718"></td>
+          <td class="staffNm" id="u_0718">
+            <input type="text" class="staff7B" value=""/>
+          </td>
+          <td class="roomNo 8F floor8B">18</td>
+          <td class="roomType" id="s_0818"></td>
+          <td class="staffNm" id="u_0818">
+            <input type="text" class="staff8B" value=""/>
+          </td>
+          <td class="roomNo 9F floor9B">18</td>
+          <td class="roomType" id="s_0918"></td>
+          <td class="staffNm" id="u_0918">
+            <input type="text" class="staff9B" value=""/>
+          </td>
+          <td class="roomNo 10F floor10B">18</td>
+          <td class="roomType" id="s_1018"></td>
+          <td class="staffNm" id="u_1018">
+            <input type="text" class="staff10B" value=""/>
+          </td>
+          <td class="roomNo 11F floor11B">18</td>
+          <td class="roomType" id="s_1118"></td>
+          <td class="staffNm" id="u_1118">
+            <input type="text" class="staff11B" value=""/>
+          </td>
+          <td class="roomNo 12F floor12B">18</td>
+          <td class="roomType" id="s_1218"></td>
+          <td class="staffNm" id="u_1218">
+            <input type="text" class="staff12B" value=""/>
+          </td>
+          <td class="roomNo 14F floor14B">18</td>
+          <td class="roomType" id="s_1418"></td>
+          <td class="staffNm" id="u_1418">
+            <input type="text" class="staff14B" value=""/>
+          </td>
+          <td class="roomNo 15F floor15B">18</td>
+          <td class="roomType" id="s_1518"></td>
+          <td class="staffNm right_end" id="u_1518">
+            <input type="text" class="staff15B" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">19</td>
+          <td class="roomType" id="s_0319"></td>
+          <td class="staffNm" id="u_0319">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4B">19</td>
+          <td class="roomType" id="s_0419"></td>
+          <td class="staffNm" id="u_0419">
+            <input type="text" class="staff4B" value=""/>
+          </td>
+          <td class="roomNo 5F floor5B">19</td>
+          <td class="roomType" id="s_0519"></td>
+          <td class="staffNm" id="u_0519">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F floor6B">19</td>
+          <td class="roomType" id="s_0619"></td>
+          <td class="staffNm" id="u_0619">
+            <input type="text" class="staff6B" value=""/>
+          </td>
+          <td class="roomNo 7F floor7B">19</td>
+          <td class="roomType" id="s_0719"></td>
+          <td class="staffNm" id="u_0719">
+            <input type="text" class="staff7B" value=""/>
+          </td>
+          <td class="roomNo 8F floor8B">19</td>
+          <td class="roomType" id="s_0819"></td>
+          <td class="staffNm" id="u_0819">
+            <input type="text" class="staff8B" value=""/>
+          </td>
+          <td class="roomNo 9F floor9B">19</td>
+          <td class="roomType" id="s_0919"></td>
+          <td class="staffNm" id="u_0919">
+            <input type="text" class="staff9B" value=""/>
+          </td>
+          <td class="roomNo 10F floor10B">19</td>
+          <td class="roomType" id="s_1019"></td>
+          <td class="staffNm" id="u_1019">
+            <input type="text" class="staff10B" value=""/>
+          </td>
+          <td class="roomNo 11F floor11B">19</td>
+          <td class="roomType" id="s_1119"></td>
+          <td class="staffNm" id="u_1119">
+            <input type="text" class="staff11B" value=""/>
+          </td>
+          <td class="roomNo 12F floor12B">19</td>
+          <td class="roomType" id="s_1219"></td>
+          <td class="staffNm" id="u_1219">
+            <input type="text" class="staff12B" value=""/>
+          </td>
+          <td class="roomNo 14F floor14B">19</td>
+          <td class="roomType" id="s_1419"></td>
+          <td class="staffNm" id="u_1419">
+            <input type="text" class="staff14B" value=""/>
+          </td>
+          <td class="roomNo 15F floor15B">19</td>
+          <td class="roomType" id="s_1519"></td>
+          <td class="staffNm right_end" id="u_1519">
+            <input type="text" class="staff15B" value=""/>
+          </td>
+          <td rowspan="18" colspan="3" class="bottom_end"></td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">20</td>
+          <td class="roomType" id="s_0320"></td>
+          <td class="staffNm" id="u_0320">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4B">20</td>
+          <td class="roomType" id="s_0420"></td>
+          <td class="staffNm" id="u_0420">
+            <input type="text" class="staff4B" value=""/>
+          </td>
+          <td class="roomNo 5F floor5B">20</td>
+          <td class="roomType" id="s_0520"></td>
+          <td class="staffNm" id="u_0520">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F floor6B">20</td>
+          <td class="roomType" id="s_0620"></td>
+          <td class="staffNm" id="u_0620">
+            <input type="text" class="staff6B" value=""/>
+          </td>
+          <td class="roomNo 7F floor7B">20</td>
+          <td class="roomType" id="s_0720"></td>
+          <td class="staffNm" id="u_0720">
+            <input type="text" class="staff7B" value=""/>
+          </td>
+          <td class="roomNo 8F floor8B">20</td>
+          <td class="roomType" id="s_0820"></td>
+          <td class="staffNm" id="u_0820">
+            <input type="text" class="staff8B" value=""/>
+          </td>
+          <td class="roomNo 9F floor9B">20</td>
+          <td class="roomType" id="s_0920"></td>
+          <td class="staffNm" id="u_0920">
+            <input type="text" class="staff9B" value=""/>
+          </td>
+          <td class="roomNo 10F floor10B">20</td>
+          <td class="roomType" id="s_1020"></td>
+          <td class="staffNm" id="u_1020">
+            <input type="text" class="staff10B" value=""/>
+          </td>
+          <td class="roomNo 11F floor11B">20</td>
+          <td class="roomType" id="s_1120"></td>
+          <td class="staffNm" id="u_1120">
+            <input type="text" class="staff11B" value=""/>
+          </td>
+          <td class="roomNo 12F floor12B">20</td>
+          <td class="roomType" id="s_1220"></td>
+          <td class="staffNm" id="u_1220">
+            <input type="text" class="staff12B" value=""/>
+          </td>
+          <td class="roomNo 14F floor14B">20</td>
+          <td class="roomType" id="s_1420"></td>
+          <td class="staffNm" id="u_1420">
+            <input type="text" class="staff14B" value=""/>
+          </td>
+          <td class="roomNo 15F floor15B">20</td>
+          <td class="roomType" id="s_1520"></td>
+          <td class="staffNm right_end" id="u_1520">
+            <input type="text" class="staff15B" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 3F floor3A">21</td>
+          <td class="roomType" id="s_0321"></td>
+          <td class="staffNm" id="u_0321">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F bottom_end floor4B">21</td>
+          <td class="roomType bottom_end" id="s_0421"></td>
+          <td class="staffNm bottom_end" id="u_0421">
+            <input type="text" class="staff4B" value=""/>
+          </td>
+          <td class="roomNo 5F floor5B">21</td>
+          <td class="roomType" id="s_0521"></td>
+          <td class="staffNm" id="u_0521">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F bottom_end floor6B">21</td>
+          <td class="roomType bottom_end" id="s_0621"></td>
+          <td class="staffNm bottom_end" id="u_0621">
+            <input type="text" class="staff6B" value=""/>
+          </td>
+          <td class="roomNo 7F bottom_end floor7B">21</td>
+          <td class="roomType bottom_end" id="s_0721"></td>
+          <td class="staffNm bottom_end" id="u_0721">
+            <input type="text" class="staff7B" value=""/>
+          </td>
+          <td class="roomNo 8F bottom_end floor8B">21</td>
+          <td class="roomType bottom_end" id="s_0821"></td>
+          <td class="staffNm bottom_end" id="u_0821">
+            <input type="text" class="staff8B" value=""/>
+          </td>
+          <td class="roomNo 9F bottom_end floor9B">21</td>
+          <td class="roomType bottom_end" id="s_0921"></td>
+          <td class="staffNm bottom_end" id="u_0921">
+            <input type="text" class="staff9B" value=""/>
+          </td>
+          <td class="roomNo 10F bottom_end floor10B">21</td>
+          <td class="roomType bottom_end" id="s_1021"></td>
+          <td class="staffNm bottom_end" id="u_1021">
+            <input type="text" class="staff10B" value=""/>
+          </td>
+          <td class="roomNo 11F bottom_end floor11B">21</td>
+          <td class="roomType bottom_end" id="s_1121"></td>
+          <td class="staffNm bottom_end" id="u_1121">
+            <input type="text" class="staff11B" value=""/>
+          </td>
+          <td class="roomNo 12F bottom_end floor12B">21</td>
+          <td class="roomType bottom_end" id="s_1221"></td>
+          <td class="staffNm bottom_end" id="u_1221">
+            <input type="text" class="staff12B" value=""/>
+          </td>
+          <td class="roomNo 14F bottom_end floor14B">21</td>
+          <td class="roomType bottom_end" id="s_1421"></td>
+          <td class="staffNm bottom_end" id="u_1421">
+            <input type="text" class="staff14B" value=""/>
+          </td>
+          <td class="roomNo 15F bottom_end floor15B">21</td>
+          <td class="roomType bottom_end" id="s_1521"></td>
+          <td class="staffNm right_end bottom_end" id="u_1521">
+            <input type="text" class="staff15B" value=""/>
+          </td>
+        </tr>
+        <!-- 21end 2staff -->
+        <tr>
+          <td class="roomNo 3F bottom_end floor3A">22</td>
+          <td class="roomType bottom_end" id="s_0322"></td>
+          <td class="staffNm bottom_end" id="u_0322">
+            <input type="text" class="staff3A" value=""/>
+          </td>
+          <td class="roomNo 4F floor4A">22</td>
+          <td class="roomType" id="s_0422"></td>
+          <td class="staffNm" id="u_0422">
+            <input type="text" class="staff4A" value=""/>
+          </td>
+          <td class="roomNo 5F bottom_end floor5B">22</td>
+          <td class="roomType bottom_end" id="s_0522"></td>
+          <td class="staffNm bottom_end" id="u_0522">
+            <input type="text" class="staff5B" value=""/>
+          </td>
+          <td class="roomNo 6F floor6A">22</td>
+          <td class="roomType" id="s_0622"></td>
+          <td class="staffNm" id="u_0622">
+            <input type="text" class="staff6A" value=""/>
+          </td>
+          <td class="roomNo 7F floor7A">22</td>
+          <td class="roomType" id="s_0722"></td>
+          <td class="staffNm" id="u_0722">
+            <input type="text" class="staff7A" value=""/>
+          </td>
+          <td class="roomNo 8F floor8A">22</td>
+          <td class="roomType" id="s_0822"></td>
+          <td class="staffNm" id="u_0822">
+            <input type="text" class="staff8A" value=""/>
+          </td>
+          <td class="roomNo 9F floor9A">22</td>
+          <td class="roomType" id="s_0922"></td>
+          <td class="staffNm" id="u_0922">
+            <input type="text" class="staff9A" value=""/>
+          </td>
+          <td class="roomNo 10F floor10A">22</td>
+          <td class="roomType" id="s_1022"></td>
+          <td class="staffNm" id="u_1022">
+            <input type="text" class="staff10A" value=""/>
+          </td>
+          <td class="roomNo 11F floor11A">22</td>
+          <td class="roomType" id="s_1122"></td>
+          <td class="staffNm" id="u_1122">
+            <input type="text" class="staff11A" value=""/>
+          </td>
+          <td class="roomNo 12F floor12A">22</td>
+          <td class="roomType" id="s_1222"></td>
+          <td class="staffNm" id="u_1222">
+            <input type="text" class="staff12A" value=""/>
+          </td>
+          <td class="roomNo 14F floor14A">22</td>
+          <td class="roomType" id="s_1422"></td>
+          <td class="staffNm" id="u_1422">
+            <input type="text" class="staff14A" value=""/>
+          </td>
+          <td class="roomNo 15F floor15A">22</td>
+          <td class="roomType" id="s_1522"></td>
+          <td class="staffNm right_end" id="u_1522">
+            <input type="text" class="staff15A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td rowspan="3" colspan="3" class="etc-room bottom_end">Board<br>Casting<br>Room</td>
+          <td class="roomNo 4F floor4A">23</td>
+          <td class="roomType" id="s_0423"></td>
+          <td class="staffNm" id="u_0423">
+            <input type="text" class="staff4A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 5F floor5A">23</td>
+          <td rowspan="2" class="roomType" id="s_0523"></td>
+          <td rowspan="2" class="staffNm" id="u_0523">
+            <input type="text" class="staff5A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 6F floor6A">23</td>
+          <td rowspan="2" class="roomType" id="s_0623"></td>
+          <td rowspan="2" class="staffNm" id="u_0623">
+            <input type="text" class="staff6A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 7F floor7A">23</td>
+          <td rowspan="2" class="roomType" id="s_0723"></td>
+          <td rowspan="2" class="staffNm" id="u_0723">
+            <input type="text" class="staff7A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 8F floor8A">23</td>
+          <td rowspan="2" class="roomType" id="s_0823"></td>
+          <td rowspan="2" class="staffNm" id="u_0823">
+            <input type="text" class="staff8A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 9F floor9A">23</td>
+          <td rowspan="2" class="roomType" id="s_0923"></td>
+          <td rowspan="2" class="staffNm" id="u_0923">
+            <input type="text" class="staff9A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 10F floor10A">23</td>
+          <td rowspan="2" class="roomType" id="s_1023"></td>
+          <td rowspan="2" class="staffNm" id="u_1023">
+            <input type="text" class="staff10A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 11F floor11A">23</td>
+          <td rowspan="2" class="roomType" id="s_1123"></td>
+          <td rowspan="2" class="staffNm" id="u_1123">
+            <input type="text" class="staff11A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 12F floor12A">23</td>
+          <td rowspan="2" class="roomType" id="s_1223"></td>
+          <td rowspan="2" class="staffNm" id="u_1223">
+            <input type="text" class="staff12A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 14F floor14A">23</td>
+          <td rowspan="2" class="roomType" id="s_1423"></td>
+          <td rowspan="2" class="staffNm" id="u_1423">
+            <input type="text" class="staff14A" value=""/>
+          </td>
+          <td rowspan="2" class="roomNo 15F floor15A">23</td>
+          <td rowspan="2" class="roomType" id="s_1523"></td>
+          <td rowspan="2" class="staffNm right_end" id="u_1523">
+            <input type="text" class="staff15A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 4F floor4A">24</td>
+          <td class="roomType" id="s_0424"></td>
+          <td class="staffNm" id="u_0424">
+            <input type="text" class="staff4A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 4F floor4A">25</td>
+          <td class="roomType" id="s_0425"></td>
+          <td class="staffNm" id="u_0425">
+            <input type="text" class="staff4A" value=""/>
+          </td>
+          <td class="roomNo 5F floor5A">24</td>
+          <td class="roomType" id="s_0524"></td>
+          <td class="staffNm" id="u_0524">
+            <input type="text" class="staff5A" value=""/>
+          </td>
+          <td class="roomNo 6F floor6A">24</td>
+          <td class="roomType" id="s_0624"></td>
+          <td class="staffNm" id="u_0624">
+            <input type="text" class="staff6A" value=""/>
+          </td>
+          <td class="roomNo 7F floor7A">24</td>
+          <td class="roomType" id="s_0724"></td>
+          <td class="staffNm" id="u_0724">
+            <input type="text" class="staff7A" value=""/>
+          </td>
+          <td class="roomNo 8F floor8A">24</td>
+          <td class="roomType" id="s_0824"></td>
+          <td class="staffNm" id="u_0824">
+            <input type="text" class="staff8A" value=""/>
+          </td>
+          <td class="roomNo 9F floor9A">24</td>
+          <td class="roomType" id="s_0924"></td>
+          <td class="staffNm" id="u_0924">
+            <input type="text" class="staff9A" value=""/>
+          </td>
+          <td class="roomNo 10F floor10A">24</td>
+          <td class="roomType" id="s_1024"></td>
+          <td class="staffNm" id="u_1024">
+            <input type="text" class="staff10A" value=""/>
+          </td>
+          <td class="roomNo 11F floor11A">24</td>
+          <td class="roomType" id="s_1124"></td>
+          <td class="staffNm" id="u_1124">
+            <input type="text" class="staff11A" value=""/>
+          </td>
+          <td class="roomNo 12F floor12A">24</td>
+          <td class="roomType" id="s_1224"></td>
+          <td class="staffNm" id="u_1224">
+            <input type="text" class="staff12A" value=""/>
+          </td>
+          <td class="roomNo 14F floor14A">24</td>
+          <td class="roomType" id="s_1424"></td>
+          <td class="staffNm" id="u_1424">
+            <input type="text" class="staff14A" value=""/>
+          </td>
+          <td class="roomNo 15F floor15A">24</td>
+          <td class="roomType" id="s_1524"></td>
+          <td class="staffNm right_end" id="u_1524">
+            <input type="text" class="staff15A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td rowspan="3" colspan="3" class="etc-room bottom_end">Conference<br>Room2</td>
+          <td class="roomNo 4F floor4A">26</td>
+          <td class="roomType" id="s_0426"></td>
+          <td class="staffNm" id="u_0426">
+            <input type="text" class="staff4A" value=""/>
+          </td>
+          <td class="roomNo 5F floor5A">25</td>
+          <td class="roomType" id="s_0525"></td>
+          <td class="staffNm" id="u_0525">
+            <input type="text" class="staff5A" value=""/>
+          </td>
+          <td class="roomNo 6F floor6A">25</td>
+          <td class="roomType" id="s_0625"></td>
+          <td class="staffNm" id="u_0625">
+            <input type="text" class="staff6A" value=""/>
+          </td>
+          <td class="roomNo 7F floor7A">25</td>
+          <td class="roomType" id="s_0725"></td>
+          <td class="staffNm" id="u_0725">
+            <input type="text" class="staff7A" value=""/>
+          </td>
+          <td class="roomNo 8F floor8A">25</td>
+          <td class="roomType" id="s_0825"></td>
+          <td class="staffNm" id="u_0825">
+            <input type="text" class="staff8A" value=""/>
+          </td>
+          <td class="roomNo 9F floor9A">25</td>
+          <td class="roomType" id="s_0925"></td>
+          <td class="staffNm" id="u_0925">
+            <input type="text" class="staff9A" value=""/>
+          </td>
+          <td class="roomNo 10F floor10A">25</td>
+          <td class="roomType" id="s_1025"></td>
+          <td class="staffNm" id="u_1025">
+            <input type="text" class="staff10A" value=""/>
+          </td>
+          <td class="roomNo 11F floor11A">25</td>
+          <td class="roomType" id="s_1125"></td>
+          <td class="staffNm" id="u_1125">
+            <input type="text" class="staff11A" value=""/>
+          </td>
+          <td class="roomNo 12F floor12A">25</td>
+          <td class="roomType" id="s_1225"></td>
+          <td class="staffNm" id="u_1225">
+            <input type="text" class="staff12A" value=""/>
+          </td>
+          <td class="roomNo 14F floor14A">25</td>
+          <td class="roomType" id="s_1425"></td>
+          <td class="staffNm" id="u_1425">
+            <input type="text" class="staff14A" value=""/>
+          </td>
+          <td class="roomNo 15F floor15A">25</td>
+          <td class="roomType" id="s_1525"></td>
+          <td class="staffNm right_end" id="u_1525">
+            <input type="text" class="staff15A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 4F bottom_end floor4A">27</td>
+          <td class="roomType bottom_end" id="s_0427"></td>
+          <td class="staffNm bottom_end" id="u_0427">
+            <input type="text" class="staff4A" value=""/>
+          </td>
+          <td class="roomNo 5F floor5A">26</td>
+          <td class="roomType" id="s_0526"></td>
+          <td class="staffNm" id="u_0526">
+            <input type="text" class="staff5A" value=""/>
+          </td>
+          <td class="roomNo 6F bottom_end floor6A">26</td>
+          <td class="roomType bottom_end" id="s_0626"></td>
+          <td class="staffNm bottom_end" id="u_0626">
+            <input type="text" class="staff6A" value=""/>
+          </td>
+          <td class="roomNo 7F bottom_end floor7A">26</td>
+          <td class="roomType bottom_end" id="s_0726"></td>
+          <td class="staffNm bottom_end" id="u_0726">
+            <input type="text" class="staff7A" value=""/>
+          </td>
+          <td class="roomNo 8F bottom_end floor8A">26</td>
+          <td class="roomType bottom_end" id="s_0826"></td>
+          <td class="staffNm bottom_end" id="u_0826">
+            <input type="text" class="staff8A" value=""/>
+          </td>
+          <td class="roomNo 9F bottom_end floor9A">26</td>
+          <td class="roomType bottom_end" id="s_0926"></td>
+          <td class="staffNm bottom_end" id="u_0926">
+            <input type="text" class="staff9A" value=""/>
+          </td>
+          <td class="roomNo 10F bottom_end floor10A">26</td>
+          <td class="roomType bottom_end" id="s_1026"></td>
+          <td class="staffNm bottom_end" id="u_1026">
+            <input type="text" class="staff10A" value=""/>
+          </td>
+          <td class="roomNo 11F bottom_end floor11A">26</td>
+          <td class="roomType bottom_end" id="s_1126"></td>
+          <td class="staffNm bottom_end" id="u_1126">
+            <input type="text" class="staff11A" value=""/>
+          </td>
+          <td class="roomNo 12F bottom_end floor12A">26</td>
+          <td class="roomType bottom_end" id="s_1226"></td>
+          <td class="staffNm bottom_end" id="u_1226">
+            <input type="text" class="staff12A" value=""/>
+          </td>
+          <td class="roomNo 14F bottom_end floor14A">26</td>
+          <td class="roomType bottom_end" id="s_1426"></td>
+          <td class="staffNm bottom_end" id="u_1426">
+            <input type="text" class="staff14A" value=""/>
+          </td>
+          <td class="roomNo 15F bottom_end floor15A">26</td>
+          <td class="roomType bottom_end" id="s_1526"></td>
+          <td class="staffNm right_end bottom_end" id="u_1526">
+            <input type="text" class="staff15A" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 4F floor4C">28</td>
+          <td class="roomType" id="s_0428"></td>
+          <td class="staffNm" id="u_0428">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F floor5A">27</td>
+          <td class="roomType" id="s_0527"></td>
+          <td class="staffNm" id="u_0527">
+            <input type="text" class="staff5A" value=""/>
+          </td>
+          <td class="roomNo 6F floor6C">27</td>
+          <td class="roomType" id="s_0627"></td>
+          <td class="staffNm" id="u_0627">
+            <input type="text" class="staff6C" value=""/>
+          </td>
+          <td class="roomNo 7F floor7C">27</td>
+          <td class="roomType" id="s_0727"></td>
+          <td class="staffNm" id="u_0727">
+            <input type="text" class="staff7C" value=""/>
+          </td>
+          <td class="roomNo 8F floor8C">27</td>
+          <td class="roomType" id="s_0827"></td>
+          <td class="staffNm" id="u_0827">
+            <input type="text" class="staff8C" value=""/>
+          </td>
+          <td class="roomNo 9F floor9C">27</td>
+          <td class="roomType" id="s_0927"></td>
+          <td class="staffNm" id="u_0927">
+            <input type="text" class="staff9C" value=""/>
+          </td>
+          <td class="roomNo 10F floor10C">27</td>
+          <td class="roomType" id="s_1027"></td>
+          <td class="staffNm" id="u_1027">
+            <input type="text" class="staff10C" value=""/>
+          </td>
+          <td class="roomNo 11F floor11C">27</td>
+          <td class="roomType" id="s_1127"></td>
+          <td class="staffNm" id="u_1127">
+            <input type="text" class="staff11C" value=""/>
+          </td>
+          <td class="roomNo 12F floor12C">27</td>
+          <td class="roomType" id="s_1227"></td>
+          <td class="staffNm" id="u_1227">
+            <input type="text" class="staff12C" value=""/>
+          </td>
+          <td class="roomNo 14F floor14C">27</td>
+          <td class="roomType" id="s_1427"></td>
+          <td class="staffNm" id="u_1427">
+            <input type="text" class="staff14C" value=""/>
+          </td>
+          <td class="roomNo 15F floor15C">27</td>
+          <td class="roomType" id="s_1527"></td>
+          <td class="staffNm right_end" id="u_1527">
+            <input type="text" class="staff15C" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td rowspan="3" colspan="3" class="etc-room bottom_end">Conference<br>Room1</td>
+          <td class="roomNo 4F floor4C">29</td>
+          <td class="roomType" id="s_0429"></td>
+          <td class="staffNm" id="u_0429">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F bottom_end floor5A">28</td>
+          <td class="roomType bottom_end" id="s_0528"></td>
+          <td class="staffNm bottom_end" id="u_0528">
+            <input type="text" class="staff5A" value=""/>
+          </td>
+          <td class="roomNo 6F floor6C">28</td>
+          <td class="roomType" id="s_0628"></td>
+          <td class="staffNm" id="u_0628">
+            <input type="text" class="staff6C" value=""/>
+          </td>
+          <td class="roomNo 7F floor7C">28</td>
+          <td class="roomType" id="s_0728"></td>
+          <td class="staffNm" id="u_0728">
+            <input type="text" class="staff7C" value=""/>
+          </td>
+          <td class="roomNo 8F floor8C">28</td>
+          <td class="roomType" id="s_0828"></td>
+          <td class="staffNm" id="u_0828">
+            <input type="text" class="staff8C" value=""/>
+          </td>
+          <td class="roomNo 9F floor9C">28</td>
+          <td class="roomType" id="s_0928"></td>
+          <td class="staffNm" id="u_0928">
+            <input type="text" class="staff9C" value=""/>
+          </td>
+          <td class="roomNo 10F floor10C">28</td>
+          <td class="roomType" id="s_1028"></td>
+          <td class="staffNm" id="u_1028">
+            <input type="text" class="staff10C" value=""/>
+          </td>
+          <td class="roomNo 11F floor11C">28</td>
+          <td class="roomType" id="s_1128"></td>
+          <td class="staffNm" id="u_1128">
+            <input type="text" class="staff11C" value=""/>
+          </td>
+          <td class="roomNo 12F floor12C">28</td>
+          <td class="roomType" id="s_1228"></td>
+          <td class="staffNm" id="u_1228">
+            <input type="text" class="staff12C" value=""/>
+          </td>
+          <td class="roomNo 14F floor14C">28</td>
+          <td class="roomType" id="s_1428"></td>
+          <td class="staffNm" id="u_1428">
+            <input type="text" class="staff14C" value=""/>
+          </td>
+          <td class="roomNo 15F floor15C">28</td>
+          <td class="roomType" id="s_1528"></td>
+          <td class="staffNm right_end" id="u_1528">
+            <input type="text" class="staff15C" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 4F floor4C">30</td>
+          <td class="roomType" id="s_0430"></td>
+          <td class="staffNm" id="u_0430">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F floor5C">29</td>
+          <td class="roomType" id="s_0529"></td>
+          <td class="staffNm" id="u_0529">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+          <td class="roomNo 6F floor6C">29</td>
+          <td class="roomType" id="s_0629"></td>
+          <td class="staffNm" id="u_0629">
+            <input type="text" class="staff6C" value=""/>
+          </td>
+          <td class="roomNo 7F floor7C">29</td>
+          <td class="roomType" id="s_0729"></td>
+          <td class="staffNm" id="u_0729">
+            <input type="text" class="staff7C" value=""/>
+          </td>
+          <td class="roomNo 8F floor8C">29</td>
+          <td class="roomType" id="s_0829"></td>
+          <td class="staffNm" id="u_0829">
+            <input type="text" class="staff8C" value=""/>
+          </td>
+          <td class="roomNo 9F floor9C">29</td>
+          <td class="roomType" id="s_0929"></td>
+          <td class="staffNm" id="u_0929">
+            <input type="text" class="staff9C" value=""/>
+          </td>
+          <td class="roomNo 10F floor10C">29</td>
+          <td class="roomType" id="s_1029"></td>
+          <td class="staffNm" id="u_1029">
+            <input type="text" class="staff10C" value=""/>
+          </td>
+          <td class="roomNo 11F floor11C">29</td>
+          <td class="roomType" id="s_1129"></td>
+          <td class="staffNm" id="u_1129">
+            <input type="text" class="staff11C" value=""/>
+          </td>
+          <td class="roomNo 12F floor12C">29</td>
+          <td class="roomType" id="s_1229"></td>
+          <td class="staffNm" id="u_1229">
+            <input type="text" class="staff12C" value=""/>
+          </td>
+          <td class="roomNo 14F floor14C">29</td>
+          <td class="roomType" id="s_1429"></td>
+          <td class="staffNm" id="u_1429">
+            <input type="text" class="staff14C" value=""/>
+          </td>
+          <td class="roomNo 15F floor15C">29</td>
+          <td class="roomType" id="s_1529"></td>
+          <td class="staffNm right_end" id="u_1529">
+            <input type="text" class="staff15C" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td class="roomNo 4F floor4C">31</td>
+          <td class="roomType" id="s_0431"></td>
+          <td class="staffNm" id="u_0431">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F floor5C">30</td>
+          <td class="roomType" id="s_0530"></td>
+          <td class="staffNm" id="u_0530">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+          <td class="roomNo 6F floor6C">30</td>
+          <td class="roomType" id="s_0630"></td>
+          <td class="staffNm" id="u_0630">
+            <input type="text" class="staff6C" value=""/>
+          </td>
+          <td class="roomNo 7F floor7C">30</td>
+          <td class="roomType" id="s_0730"></td>
+          <td class="staffNm" id="u_0730">
+            <input type="text" class="staff7C" value=""/>
+          </td>
+          <td class="roomNo 8F floor8C">30</td>
+          <td class="roomType" id="s_0830"></td>
+          <td class="staffNm" id="u_0830">
+            <input type="text" class="staff8C" value=""/>
+          </td>
+          <td class="roomNo 9F floor9C">30</td>
+          <td class="roomType" id="s_0930"></td>
+          <td class="staffNm" id="u_0930">
+            <input type="text" class="staff9C" value=""/>
+          </td>
+          <td class="roomNo 10F floor10C">30</td>
+          <td class="roomType" id="s_1030"></td>
+          <td class="staffNm" id="u_1030">
+            <input type="text" class="staff10C" value=""/>
+          </td>
+          <td class="roomNo 11F floor11C">30</td>
+          <td class="roomType" id="s_1130"></td>
+          <td class="staffNm" id="u_1130">
+            <input type="text" class="staff11C" value=""/>
+          </td>
+          <td class="roomNo 12F floor12C">30</td>
+          <td class="roomType" id="s_1230"></td>
+          <td class="staffNm" id="u_1230">
+            <input type="text" class="staff12C" value=""/>
+          </td>
+          <td class="roomNo 14F floor14C">30</td>
+          <td class="roomType" id="s_1430"></td>
+          <td class="staffNm" id="u_1430">
+            <input type="text" class="staff14C" value=""/>
+          </td>
+          <td class="roomNo 15F floor15C">30</td>
+          <td class="roomType" id="s_1530"></td>
+          <td class="staffNm right_end" id="u_1530">
+            <input type="text" class="staff15C" value=""/>
+          </td>
+        </tr>
+        <!-- 31end 3staff -->
+        <tr>
+          <td colspan="2" class="bottom_end right_end">V</td>
+          <td class="bottom_end right_end" id="total_v"></td>
+          <td class="roomNo 4F floor4C">32</td>
+          <td class="roomType" id="s_0432"></td>
+          <td class="staffNm" id="u_0432">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F floor5C">31</td>
+          <td class="roomType" id="s_0531"></td>
+          <td class="staffNm" id="u_0531">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+          <td class="roomNo 6F bottom_end floor6C">31</td>
+          <td class="roomType bottom_end" id="s_0631"></td>
+          <td class="staffNm bottom_end" id="u_0631">
+            <input type="text" class="staff6C" value=""/>
+          </td>
+          <td class="roomNo 7F bottom_end floor7C">31</td>
+          <td class="roomType bottom_end" id="s_0731"></td>
+          <td class="staffNm bottom_end" id="u_0731">
+            <input type="text" class="staff7C" value=""/>
+          </td>
+          <td class="roomNo 8F bottom_end floor8C">31</td>
+          <td class="roomType bottom_end" id="s_0831"></td>
+          <td class="staffNm bottom_end" id="u_0831">
+            <input type="text" class="staff8C" value=""/>
+          </td>
+          <td class="roomNo 9F bottom_end floor9C">31</td>
+          <td class="roomType bottom_end" id="s_0931"></td>
+          <td class="staffNm bottom_end" id="u_0931">
+            <input type="text" class="staff9C" value=""/>
+          </td>
+          <td class="roomNo 10F bottom_end floor10C">31</td>
+          <td class="roomType bottom_end" id="s_1031"></td>
+          <td class="staffNm bottom_end" id="u_1031">
+            <input type="text" class="staff10C" value=""/>
+          </td>
+          <td class="roomNo 11F bottom_end floor11C">31</td>
+          <td class="roomType bottom_end" id="s_1131"></td>
+          <td class="staffNm bottom_end" id="u_1131">
+            <input type="text" class="staff11C" value=""/>
+          </td>
+          <td class="roomNo 12F bottom_end floor12C">31</td>
+          <td class="roomType bottom_end" id="s_1231"></td>
+          <td class="staffNm bottom_end" id="u_1231">
+            <input type="text" class="staff12C" value=""/>
+          </td>
+          <td class="roomNo 14F bottom_end floor14C">31</td>
+          <td class="roomType bottom_end" id="s_1431"></td>
+          <td class="staffNm bottom_end" id="u_1431">
+            <input type="text" class="staff14C" value=""/>
+          </td>
+          <td class="roomNo 15F bottom_end floor15C">31</td>
+          <td class="roomType bottom_end" id="s_1531"></td>
+          <td class="staffNm right_end bottom_end" id="u_1531">
+            <input type="text" class="staff15C" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="bottom_end right_end">C</td>
+          <td class="bottom_end right_end" id="total_c"></td>
+          <td class="roomNo 4F floor4C">33</td>
+          <td class="roomType" id="s_0433"></td>
+          <td class="staffNm" id="u_0433">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F floor5C">32</td>
+          <td class="roomType" id="s_0532"></td>
+          <td class="staffNm right_end" id="u_0532">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+          <td rowspan="5" colspan="27"></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="bottom_end right_end">O</td>
+          <td class="bottom_end right_end" id="total_o"></td>
+          <td class="roomNo 4F bottom_end floor4C">34</td>
+          <td class="roomType bottom_end" id="s_0434"></td>
+          <td class="staffNm bottom_end" id="u_0434">
+            <input type="text" class="staff4C" value=""/>
+          </td>
+          <td class="roomNo 5F floor5C">33</td>
+          <td class="roomType" id="s_0533"></td>
+          <td class="staffNm right_end" id="u_0533">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="bottom_end right_end">O.O</td>
+          <td class="bottom_end right_end" id="total_oo"></td>
+          <td rowspan="2" colspan="3" class="bottom_end"></td>
+          <td class="roomNo 5F floor5C">34</td>
+          <td class="roomType" id="s_0534"></td>
+          <td class="staffNm right_end" id="u_0534">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="bottom_end right_end">Total</td>
+          <td class="bottom_end right_end" id="total"></td>
+          <td class="roomNo 5F bottom_end floor5C">35</td>
+          <td class="roomType bottom_end" id="s_0535"></td>
+          <td class="staffNm right_end bottom_end" id="u_0535">
+            <input type="text" class="staff5C" value=""/>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="footer">
+      <table class="fStaff">
+        <tbody>
+          <tr>
+            <td rowspan="3" class="floor-type">3A</td>
+            <td rowspan="3" class="floor-staff">
+              <input type="text" id="3A" value=""/>
+            </td>
+            <td class="floor-type">4A</td>
+            <td class="floor-staff">
+              <input type="text" id="4A" value=""/>
+            </td>
+            <td class="floor-type">5A</td>
+            <td class="floor-staff">
+              <input type="text" id="5A" value=""/>
+            </td>
+            <td class="floor-type">6A</td>
+            <td class="floor-staff">
+              <input type="text" id="6A" value=""/>
+            </td>
+            <td class="floor-type">7A</td>
+            <td class="floor-staff">
+              <input type="text" id="7A" value=""/>
+            </td>
+            <td class="floor-type">8A</td>
+            <td class="floor-staff">
+              <input type="text" id="8A" value=""/>
+            </td>
+            <td class="floor-type">9A</td>
+            <td class="floor-staff">
+              <input type="text" id="9A" value=""/>
+            </td>
+            <td class="floor-type">10A</td>
+            <td class="floor-staff">
+              <input type="text" id="10A" value=""/>
+            </td>
+            <td class="floor-type">11A</td>
+            <td class="floor-staff">
+              <input type="text" id="11A" value=""/>
+            </td>
+            <td class="floor-type">12A</td>
+            <td class="floor-staff">
+              <input type="text" id="12A" value=""/>
+            </td>
+            <td class="floor-type">14A</td>
+            <td class="floor-staff">
+              <input type="text" id="14A" value=""/>
+            </td>
+            <td class="floor-type">15A</td>
+            <td class="floor-staff">
+              <input type="text" id="15A" value=""/>
+            </td>
+            <td rowspan="3" class="floor-type">16A</td>
+            <td rowspan="3" class="floor-staff">
+              <input type="text" id="16A" value=""/>
+            </td>
+            <td rowspan="3" class="btn-floor">
+              <input type="button" onclick="fn_floor_staff()" id="print" value="방 담당자"/>
+            </td>
+          </tr>
+          <tr>
+            <td class="floor-type">4B</td>
+            <td class="floor-staff">
+              <input type="text" id="4B" value=""/>
+            </td>
+            <td class="floor-type">5B</td>
+            <td class="floor-staff">
+              <input type="text" id="5B" value=""/>
+            </td>
+            <td class="floor-type">6B</td>
+            <td class="floor-staff">
+              <input type="text" id="6B" value=""/>
+            </td>
+            <td class="floor-type">7B</td>
+            <td class="floor-staff">
+              <input type="text" id="7B" value=""/>
+            </td>
+            <td class="floor-type">8B</td>
+            <td class="floor-staff">
+              <input type="text" id="8B" value=""/>
+            </td>
+            <td class="floor-type">9B</td>
+            <td class="floor-staff">
+              <input type="text" id="9B" value=""/>
+            </td>
+            <td class="floor-type">10B</td>
+            <td class="floor-staff">
+              <input type="text" id="10B" value=""/>
+            </td>
+            <td class="floor-type">11B</td>
+            <td class="floor-staff">
+              <input type="text" id="11B" value=""/>
+            </td>
+            <td class="floor-type">12B</td>
+            <td class="floor-staff">
+              <input type="text" id="12B" value=""/>
+            </td>
+            <td class="floor-type">14B</td>
+            <td class="floor-staff">
+              <input type="text" id="14B" value=""/>
+            </td>
+            <td class="floor-type">15B</td>
+            <td class="floor-staff">
+              <input type="text" id="15B" value=""/>
+            </td>
+          </tr>
+          <tr>
+            <td class="floor-type">4C</td>
+            <td class="floor-staff">
+              <input type="text" id="4C" value=""/>
+            </td>
+            <td class="floor-type">5C</td>
+            <td class="floor-staff">
+              <input type="text" id="5C" value=""/>
+            </td>
+            <td class="floor-type">6C</td>
+            <td class="floor-staff">
+              <input type="text" id="6C" value=""/>
+            </td>
+            <td class="floor-type">7C</td>
+            <td class="floor-staff">
+              <input type="text" id="7C" value=""/>
+            </td>
+            <td class="floor-type">8C</td>
+            <td class="floor-staff">
+              <input type="text" id="8C" value=""/>
+            </td>
+            <td class="floor-type">9C</td>
+            <td class="floor-staff">
+              <input type="text" id="9C" value=""/>
+            </td>
+            <td class="floor-type">10C</td>
+            <td class="floor-staff">
+              <input type="text" id="10C" value=""/>
+            </td>
+            <td class="floor-type">11C</td>
+            <td class="floor-staff">
+              <input type="text" id="11C" value=""/>
+            </td>
+            <td class="floor-type">12C</td>
+            <td class="floor-staff">
+              <input type="text" id="12C" value=""/>
+            </td>
+            <td class="floor-type">14C</td>
+            <td class="floor-staff">
+              <input type="text" id="14C" value=""/>
+            </td>
+            <td class="floor-type">15C</td>
+            <td class="floor-staff">
+              <input type="text" id="15C" value=""/>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
